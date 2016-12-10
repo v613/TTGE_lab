@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+ 	<title>Laboratorul 3 TTGE</title>
+ 	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link rel="stylesheet" href="bootstrap.min.css">
+ 	<script src="jquery.min.js"></script>
+ 	<script src="bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+	<div class="container">
+		<h1>TTGE Laboratorul 3</h1>
+		<div class="row" align="center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-inverse card-info">
+                        <div class="card-block bg-info"><!-- Frumusete in centru -->
+                            <h3 class="text-uppercase">Municipii</h3>
+                            <h1 class="display-1" id="municipii"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-inverse card-success">
+                        <div class="card-block bg-success"><!-- Frumusete in centru -->
+                            <h3 class="text-uppercase">Orase</h3>
+                            <h1 class="display-1" id="orase"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-inverse card-danger">
+                        <div class="card-block bg-danger"><!-- Frumusete in centru -->
+                            <h3 class="text-uppercase">Sate</h3>
+                            <h1 class="display-1" id="sate"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora02')">00-02</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora24')">02-04</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora46')">04-06</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora68')">06-08</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora810')">08-10</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora1012')">10-12</button>
+  </div>
+</div>
+
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora1214')">12-14</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora1416')">14-16</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora1618')">16-18</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora1820')">18-20</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora2022')">20-22</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default" onclick="find('ora2200')">22-00</button>
+  </div>
+</div>
+<p id='res'></p>
+</div>
+	
+	<script type="text/javascript">
+ 		
+ 		var orase = document.getElementById("orase");
+ 		var municipii = document.getElementById("municipii");
+ 		var sate = document.getElementById("sate");
+ 		var request=new XMLHttpRequest();
+ 		request.open('GET','data.json');
+ 		request.onload=function()
+ 			{
+ 				var res=request.responseText;
+ 				var data=JSON.parse(res);
+ 				for(i=0;i<data.length;i++)
+ 					{
+ 						if(data[i].titlu=="Municipii")
+ 							municipii.innerHTML=data[i].cantitatea;
+ 						if(data[i].titlu=="Orașe")
+ 							orase.innerHTML=data[i].cantitatea;
+ 						if(data[i].titlu=="Sate")
+ 							sate.innerHTML=data[i].cantitatea;
+ 					}
+ 			}
+ 		request.send();
+ 		function find(param)
+ 			{
+ 				var res=request.responseText;
+ 				var data=JSON.parse(res);
+ 				var html="";
+ 				for(i=0;i<data.length;i++)
+ 					{
+ 						switch(param)
+ 							{
+ 								case 'ora02' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora02+"</div>";break;
+ 								case 'ora24' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora24+"</div>";break;
+ 								case 'ora46' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora46+"</div>";break;
+ 								case 'ora68' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora68+"</div>";break;
+ 								case 'ora810' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora810+"</div>";break;
+ 								case 'ora1012' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora1012+"</div>";break;
+ 								case 'ora1214' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora1214+"</div>";break;
+ 								case 'ora1416' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora1416+"</div>";break;
+ 								case 'ora1618' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora1618+"</div>";break;
+ 								case 'ora1820' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora1820+"</div>";break;
+ 								case 'ora2022' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora2022+"</div>";break;
+ 								case 'ora2200' : html+="<div class='alert alert-info' role='alert'>Tip Localitate : "+data[i].titlu+"<br>Numarul de incendii: "+data[i].ora2200+"</div>";break;
+ 							}
+ 					}
+ 				document.getElementById("res").innerHTML=html;
+ 			}
+ 	</script>
+</body>
+</html>
